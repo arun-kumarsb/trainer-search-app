@@ -1,2 +1,0 @@
-# trainer-search-app
-# Hi
