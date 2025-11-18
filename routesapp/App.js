@@ -68,7 +68,7 @@ export default function App() {
             <View style={styles.avatarWrapper}>
               <Image
                 source={{
-                  uri: 'https://i.pravatar.cc/250?img=3',
+                  uri: 'https://i.pravatar.cc/350?img=3',
                 }}
                 style={[styles.avatar, { borderColor: theme.accent }]}
               />
@@ -210,9 +210,9 @@ export default function App() {
             <Text style={[styles.sectionTitle, { color: theme.text }]}>Education</Text>
           </View>
           <View style={styles.eduItem}>
-              <Text style={[styles.eduDegree, { color: theme.text }]}>B.Tech in Computer Science</Text>
-              <Text style={[styles.eduSchool, { color: theme.accent }]}>Indian Institute of Technology</Text>
-              <Text style={[styles.eduGrade, { color: theme.textSecondary }]}>2016 - 2020 • Grade: 8.2/10</Text>
+              <Text style={[styles.eduDegree, { color: theme.text }]}>B.Engg in Information Science and Engineering</Text>
+              <Text style={[styles.eduSchool, { color: theme.accent }]}>The National Institute of Engineering</Text>
+              <Text style={[styles.eduGrade, { color: theme.textSecondary }]}>2024 - 2028 • Grade: 9.25/10</Text>
             </View>
         </View>
 
@@ -248,10 +248,10 @@ export default function App() {
         {/* FOOTER */}
         <View style={[styles.footerSection, { backgroundColor: theme.bgSecondary, borderTopColor: theme.border }]}>
           <View style={styles.socialIconsRow}>
-            <TouchableOpacity onPress={() => openLink('https://github.com')}>
+            <TouchableOpacity onPress={() => openLink('https://github.com/arun-kumarsb/')}>
               <Text style={styles.socialIconLarge}>🐙</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => openLink('https://linkedin.com')}>
+            <TouchableOpacity onPress={() => openLink('https://www.linkedin.com/in/iyursmilx/')}>
               <Text style={styles.socialIconLarge}>💼</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => openLink('https://twitter.com')}>

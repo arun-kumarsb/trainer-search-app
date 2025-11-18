@@ -1,5 +1,5 @@
 {
-  "name": "routesapp",
+  "name": "routing",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -10,12 +10,9 @@
   },
   "dependencies": {
     "expo": "~54.0.24",
-    "expo-router": "~6.0.15",
     "expo-status-bar": "~3.0.8",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-native": "0.81.5",
-    "react-native-web": "^0.21.0"
+    "react-native": "0.81.5"
   },
   "private": true
 }
