@@ -79,7 +79,7 @@ export default function ProfileScreen() {
   const shareProfile = () => {
     Share.share({
       message: "Check out Arun Kumar’s professional profile!",
-      url: "https://github.com/arunkumar",
+      url: "https://github.com/arun-kumarsb",
     });
   };
 
@@ -159,15 +159,15 @@ export default function ProfileScreen() {
         {/* Quick Stats */}
         <View style={styles.quickRow}>
           <View style={styles.quickCard}>
-            <Text style={styles.quickNum}>1.2k</Text>
+            <Text style={styles.quickNum}>3</Text>
             <Text style={styles.quickLabel}>Followers</Text>
           </View>
           <View style={styles.quickCard}>
-            <Text style={styles.quickNum}>18</Text>
+            <Text style={styles.quickNum}>2</Text>
             <Text style={styles.quickLabel}>Projects</Text>
           </View>
           <View style={styles.quickCard}>
-            <Text style={styles.quickNum}>15</Text>
+            <Text style={styles.quickNum}>3</Text>
             <Text style={styles.quickLabel}>Repos</Text>
           </View>
         </View>
@@ -231,7 +231,7 @@ export default function ProfileScreen() {
         </Section>
 
         {/* Projects (Clickable) */}
-        <Section title="Featured Projects">
+        <Section title="Featured Projects" id="1">
           {projects.map((p, i) => (
             <TouchableOpacity
               key={i}
@@ -272,6 +272,12 @@ export default function ProfileScreen() {
           </TouchableOpacity>
         </Section>
       </View>
+
+      {/* Footer */}
+      <View style={styles.footer}>
+              <Text style={styles.footerText}>Built with ❤️ by Arun Kumar</Text>
+              <Text style={styles.footerSub}>React Native • Expo • 2025</Text>
+            </View>
     </ScrollView>
   );
 }
@@ -290,6 +296,25 @@ const Card = ({ children }) => <View style={styles.card}>{children}</View>;
 /* STYLES */
 const styles = StyleSheet.create({
   page: { flex: 1, backgroundColor: "#05060a" },
+
+  // footer
+  footer: {
+    marginTop: 30,
+    paddingVertical: 30,
+    alignItems: "center",
+    borderTopWidth: 1,
+    borderTopColor: "rgba(255,255,255,0.05)",
+  },
+  footerText: {
+    color: "#eaf6ff",
+    fontSize: 14,
+    fontWeight: "700",
+  },
+  footerSub: {
+    color: "#7f98ac",
+    marginTop: 6,
+    fontSize: 12,
+  },
 
   /* Banner */
   bannerWrap: { position: "relative" },
