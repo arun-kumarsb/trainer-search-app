@@ -1,365 +1,431 @@
+import React from "react";
 import {
   StyleSheet,
-  Text,
   View,
+  Text,
   Image,
   ScrollView,
   TouchableOpacity,
+  Linking,
+  Share,
 } from "react-native";
-import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function Profile() {
+/**
+ * LinkedIn-like Profile Screen
+ * Fully clickable actions
+ * Dark Neon Theme
+ */
+
+export default function ProfileScreen() {
+  /** SKILLS */
+  const skills = [
+    "React Native",
+    "TypeScript",
+    "Node.js",
+    "Python",
+    "TensorFlow",
+    "Docker",
+    "Postgres",
+  ];
+
+  /** EDUCATION (clickable rows) */
+  const education = [
+    {
+      school: "The National Institute of Engineering, Mysuru",
+      degree: "Bachelor of Engineering — Information Science",
+      range: "Sep 2024 - Nov 2028",
+      url: "https://nie.ac.in",
+    },
+    {
+      school: "Kendriya Vidyalaya (KV)",
+      degree: "High School & Intermediate — PCM",
+      range: "Mar 2012 - Jul 2024",
+      url: "https://kvsangathan.nic.in",
+    },
+  ];
+
+  /** PROJECTS (clickable rows) */
+  const projects = [
+    {
+      title: "Smart Fitness Tracker",
+      desc: "On-device pose estimation + workout analytics.",
+      link: "https://github.com/yourusername/fitness-tracker",
+    },
+    {
+      title: "GitHub Repo Analyzer",
+      desc: "CLI tool to compute repo health & contributor metrics.",
+      link: "https://github.com/yourusername/repo-analyzer",
+    },
+  ];
+
+  /** LANGUAGES */
+  const languages = [
+    { lang: "English", level: "Fluent" },
+    { lang: "Hindi", level: "Native" },
+    { lang: "Kannada", level: "Conversational" },
+  ];
+
+  /** ACTION FUNCTIONS */
+  const sendEmail = () => {
+    Linking.openURL("mailto:arunkumar@gmail.com");
+  };
+
+  const openResume = () => {
+    Linking.openURL("https://your-resume-link.com/resume.pdf");
+  };
+
+  const shareProfile = () => {
+    Share.share({
+      message: "Check out Arun Kumar’s professional profile!",
+      url: "https://github.com/arunkumar",
+    });
+  };
+
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-
+    <ScrollView style={styles.page} showsVerticalScrollIndicator={false}>
       {/* Banner */}
-      <LinearGradient
-  colors={["#003566", "#001D3D", "#000814"]}
-  style={styles.banner}
-/>
+      <View style={styles.bannerWrap}>
+        <LinearGradient colors={["#012238", "#001426"]} style={styles.banner} />
+        <View style={[styles.glow, styles.glowLeft]} />
+        <View style={[styles.glow, styles.glowRight]} />
+      </View>
 
-
-
-
-      {/* Header */}
+      {/* HEADER */}
       <View style={styles.header}>
         <Image
-          source={{
-            uri: "https://avatars.githubusercontent.com/u/583231?v=4",
-          }}
+          source={{ uri: "https://avatars.githubusercontent.com/u/583231?v=4" }}
           style={styles.avatar}
         />
 
         <View style={styles.headerRight}>
-          <Text style={styles.name}>Arun Kumar</Text>
-          <Text style={styles.headline}>
-            Software Developer • AI/ML Practitioner
-          </Text>
-
-          <View style={styles.statsRow}>
-            <Text style={styles.stats}>1.2k Followers</Text>
-            <Text style={styles.dot}>•</Text>
-            <Text style={styles.stats}>350 Connections</Text>
+          <View style={styles.titleRow}>
+            <Text style={styles.name}>Arun Kumar</Text>
+            <View style={styles.verifiedBadge}>
+              <Ionicons name="shield-checkmark" size={14} color="#bcd8ff" />
+            </View>
           </View>
 
-          <TouchableOpacity style={styles.actionBtn}>
-            <Text style={styles.actionText}>Connect</Text>
-          </TouchableOpacity>
+          <Text style={styles.pronoun}>He/Him</Text>
+
+          <Text style={styles.headline}>
+            Software Developer • AI/ML Practitioner • Open Source
+          </Text>
+
+          <Text style={styles.stats}>479 connections • India</Text>
         </View>
       </View>
 
-      {/* About */}
-      <Section title="About">
-        <Text style={styles.text}>
-          Passion-driven engineer focused on scalable software, mobile
-          interfaces, and applied machine learning. Strong emphasis on clean,
-          maintainable architecture and long-term product thinking.
-        </Text>
-      </Section>
+      {/* ACTION BAR (LinkedIn Style) */}
+      <View style={styles.actionSection}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.actionScroll}
+        >
+          <TouchableOpacity style={styles.btnUniform}>
+            <Text style={styles.btnText}>Connect</Text>
+          </TouchableOpacity>
 
-      {/* Skills */}
-      <Section title="Skills">
-        <View style={styles.skillWrap}>
-          {[
-            "React Native",
-            "Python",
-            "Machine Learning",
-            "Deep Learning",
-            "Node.js",
-            "Docker",
-            "MongoDB",
-            "TypeScript",
-          ].map((s, i) => (
-            <View key={i} style={styles.skillTag}>
-              <Text style={styles.skillText}>{s}</Text>
+          <TouchableOpacity style={styles.btnUniform} onPress={sendEmail}>
+            <Text style={styles.btnText}>Message</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.btnUniform}>
+            <Text style={styles.btnText}>Follow</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.btnUniform} onPress={openResume}>
+            <Text style={styles.btnText}>Resume</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.btnUniform} onPress={shareProfile}>
+            <Ionicons name="share-social" size={18} color="#ffffff" />
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+
+      {/* MAIN CONTENT */}
+      <View style={styles.content}>
+        <Section title="About">
+          <Text style={styles.bodyText}>
+            Absolute learner and curious freshman focused on practical software
+            engineering and applied machine learning. I build production-quality
+            apps and data-driven systems with clean architecture.
+          </Text>
+        </Section>
+
+        {/* Quick Stats */}
+        <View style={styles.quickRow}>
+          <View style={styles.quickCard}>
+            <Text style={styles.quickNum}>1.2k</Text>
+            <Text style={styles.quickLabel}>Followers</Text>
+          </View>
+          <View style={styles.quickCard}>
+            <Text style={styles.quickNum}>18</Text>
+            <Text style={styles.quickLabel}>Projects</Text>
+          </View>
+          <View style={styles.quickCard}>
+            <Text style={styles.quickNum}>15</Text>
+            <Text style={styles.quickLabel}>Repos</Text>
+          </View>
+        </View>
+
+        {/* Skills */}
+        <Section title="Skills & Tech Stack">
+          <View style={styles.skillWrap}>
+            {skills.map((s) => (
+              <View key={s} style={styles.skillTag}>
+                <Text style={styles.skillText}>{s}</Text>
+              </View>
+            ))}
+          </View>
+        </Section>
+
+        {/* Experience */}
+        <Section title="Experience">
+          <Card>
+            <Text style={styles.cardTitle}>Software Developer Intern</Text>
+            <Text style={styles.cardSub}>TCS • 2023 - Present</Text>
+            <Text style={styles.bodyText}>
+              Worked on backend services, modular UI, and reliability
+              improvements for large-scale systems.
+            </Text>
+          </Card>
+
+          <Card>
+            <Text style={styles.cardTitle}>AI/ML Research Contributor</Text>
+            <Text style={styles.cardSub}>Open Source • 2022 - 2023</Text>
+            <Text style={styles.bodyText}>
+              Built training pipelines, applied models & production inference
+              tooling.
+            </Text>
+          </Card>
+        </Section>
+
+        {/* Education (Clickable) */}
+        <Section title="Education">
+          {education.map((edu, i) => (
+            <TouchableOpacity
+              key={i}
+              style={styles.row}
+              onPress={() => Linking.openURL(edu.url)}
+              activeOpacity={0.7}
+            >
+              <View style={styles.rowLogo}>
+                <Text style={styles.rowLogoText}>NIE</Text>
+              </View>
+
+              <View style={styles.rowBody}>
+                <Text style={styles.rowTitle}>{edu.school}</Text>
+                <Text style={styles.rowSub}>{edu.degree}</Text>
+                <Text style={styles.rowMuted}>{edu.range}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+
+          <TouchableOpacity style={styles.showMoreRow}>
+            <Text style={styles.showMoreText}>Show all educations →</Text>
+          </TouchableOpacity>
+        </Section>
+
+        {/* Projects (Clickable) */}
+        <Section title="Featured Projects">
+          {projects.map((p, i) => (
+            <TouchableOpacity
+              key={i}
+              style={styles.row}
+              onPress={() => Linking.openURL(p.link)}
+              activeOpacity={0.7}
+            >
+              <View style={styles.rowLogo}>
+                <Ionicons name="folder-open" size={26} color="#cfe9ff" />
+              </View>
+              <View style={styles.rowBody}>
+                <Text style={styles.rowTitle}>{p.title}</Text>
+                <Text style={styles.rowSub}>{p.desc}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </Section>
+
+        {/* Languages */}
+        <Section title="Languages">
+          {languages.map((l, i) => (
+            <View key={i} style={styles.row}>
+              <View style={styles.rowLogo}>
+                <Ionicons name="language" size={22} color="#cfe9ff" />
+              </View>
+              <View style={styles.rowBody}>
+                <Text style={styles.rowTitle}>{l.lang}</Text>
+                <Text style={styles.rowSub}>{l.level}</Text>
+              </View>
             </View>
           ))}
-        </View>
-      </Section>
+        </Section>
 
-      {/* Experience */}
-      <Section title="Experience">
-        {[
-          {
-            role: "Software Developer Intern",
-            company: "TCS",
-            duration: "2023 - Present",
-            desc: "Contributed to high-availability backend systems, modular UI components, and application scaling strategies.",
-          },
-          {
-            role: "AI & ML Research Contributor",
-            company: "Open Source",
-            duration: "2022 - 2023",
-            desc: "Built deep learning models and deployed data-driven inference systems in collaborative environments.",
-          },
-        ].map((exp, i) => (
-          <View key={i} style={styles.card}>
-            <Text style={styles.cardTitle}>{exp.role}</Text>
-            <Text style={styles.cardSubtitle}>{exp.company}</Text>
-            <Text style={styles.cardDuration}>{exp.duration}</Text>
-            <Text style={styles.text}>{exp.desc}</Text>
-          </View>
-        ))}
-      </Section>
-
-      {/* Education */}
-      <Section title="Education">
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>B.Tech in Computer Science</Text>
-          <Text style={styles.cardSubtitle}>RV College of Engineering</Text>
-          <Text style={styles.cardDuration}>2021 - 2025</Text>
-        </View>
-      </Section>
-
-      {/* Certifications */}
-      <Section title="Certifications">
-        {[
-          "Machine Learning — Coursera",
-          "Deep Learning Specialization",
-          "React Native Advanced",
-          "Cloud Essentials",
-        ].map((c, i) => (
-          <View key={i} style={styles.rowItem}>
-            <Ionicons name="checkmark-circle-outline" size={20} color="#909090" />
-            <Text style={styles.text}>{c}</Text>
-          </View>
-        ))}
-      </Section>
-
-      {/* Projects */}
-      <Section title="Projects">
-        {[
-          {
-            name: "Fitness Tracker App",
-            desc: "Pose estimation & motion analytics using mobile ML models.",
-          },
-          {
-            name: "GitHub Repo Analyzer",
-            desc: "CLI tool to inspect commit patterns and repository health.",
-          },
-          {
-            name: "ML Weather Predictor",
-            desc: "Regression models for climate forecasting.",
-          },
-        ].map((p, i) => (
-          <View key={i} style={styles.card}>
-            <Text style={styles.cardTitle}>{p.name}</Text>
-            <Text style={styles.text}>{p.desc}</Text>
-          </View>
-        ))}
-      </Section>
-
-      {/* Languages */}
-      <Section title="Languages">
-        {[
-          { lang: "English", level: "Fluent" },
-          { lang: "Hindi", level: "Native" },
-          { lang: "Kannada", level: "Conversational" },
-        ].map((l, i) => (
-          <View key={i} style={styles.langRow}>
-            <Text style={styles.langText}>{l.lang}</Text>
-            <Text style={styles.langLevel}>{l.level}</Text>
-          </View>
-        ))}
-      </Section>
-
-      {/* Resume */}
-      <Section title="Resume">
-        <TouchableOpacity style={styles.resumeBtn}>
-          <Text style={styles.resumeText}>Download Resume</Text>
-        </TouchableOpacity>
-      </Section>
-
+        {/* Resume CTA */}
+        <Section>
+          <TouchableOpacity style={styles.resumeCta} onPress={openResume}>
+            <Text style={styles.resumeCtaText}>Download Resume</Text>
+          </TouchableOpacity>
+        </Section>
+      </View>
     </ScrollView>
   );
 }
 
+/* Section Wrapper */
 const Section = ({ title, children }) => (
   <View style={styles.section}>
-    <Text style={styles.sectionTitle}>{title}</Text>
+    {title ? <Text style={styles.sectionTitle}>{title}</Text> : null}
     {children}
   </View>
 );
 
+/* Card */
+const Card = ({ children }) => <View style={styles.card}>{children}</View>;
+
+/* STYLES */
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#0c0c0c",
-    flex: 1,
-  },
+  page: { flex: 1, backgroundColor: "#05060a" },
 
+  /* Banner */
+  bannerWrap: { position: "relative" },
   banner: {
-    height: 150,
+    height: 170,
     width: "100%",
+    borderBottomLeftRadius: 120,
+    borderBottomRightRadius: 120,
+    overflow: "hidden",
   },
+  glow: {
+    position: "absolute",
+    width: 260,
+    height: 260,
+    borderRadius: 200,
+    opacity: 0.15,
+  },
+  glowLeft: { backgroundColor: "#2ea7ff", top: 10, left: 40 },
+  glowRight: { backgroundColor: "#00a0ff", top: -40, right: 40 },
 
+  /* Header */
   header: {
     flexDirection: "row",
-    marginTop: -50,
-    paddingHorizontal: 16,
+    marginTop: -70,
+    paddingHorizontal: 10,
     alignItems: "center",
   },
-
   avatar: {
-    width: 95,
-    height: 95,
+    width: 110,
+    height: 110,
     borderRadius: 60,
-    borderWidth: 2,
-    borderColor: "#2e2e2e",
-    backgroundColor: "#1a1a1a",
+    borderWidth: 3,
+    borderColor: "#071426",
+    backgroundColor: "#0b0c0f",
   },
+  headerRight: { flex: 1, marginLeft: 28 },
+  titleRow: { flexDirection: "row", alignItems: "center" },
+  name: { color: "#e8f5ff", fontSize: 22, fontWeight: "700" },
+  verifiedBadge: { marginLeft: 8, padding: 4 },
+  pronoun: { color: "#9aa8b8", marginTop: 2, fontSize: 12 },
+  headline: { color: "#b9cfe6", marginTop: 8, fontSize: 13 },
+  stats: { color: "#9fb2c9", fontSize: 12, marginTop: 8 },
 
-  headerRight: {
+  /* Action Section */
+  actionSection: {
+    marginTop: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+  },
+  actionScroll: { paddingRight: 20, alignItems: "center" },
+
+  /* Action Buttons */
+  btnUniform: {
+    width: 95,
+    height: 36,
+    backgroundColor: "#012238",
+    borderRadius: 20,
+    marginRight: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  btnText: { color: "#fff", fontWeight: "600", fontSize: 13 },
+
+  /* Content */
+  content: { paddingHorizontal: 18, paddingTop: 10, paddingBottom: 36 },
+
+  /* Sections */
+  section: { marginBottom: 10 },
+  sectionTitle: { color: "#cfe9ff", fontSize: 16, fontWeight: "700", marginBottom: 6 },
+  bodyText: { color: "#c5dff3", fontSize: 14, lineHeight: 20 },
+
+  /* Quick Stats */
+  quickRow: { flexDirection: "row", marginVertical: 12 },
+  quickCard: {
+    backgroundColor: "#071220",
     flex: 1,
-    marginLeft: 16,
-  },
-
-  name: {
-    fontSize: 22,
-    fontWeight: "700",
-    color: "#f2f2f2",
-  },
-
-  headline: {
-    fontSize: 14,
-    color: "#909090",
-    marginTop: 4,
-    lineHeight: 18,
-  },
-
-  statsRow: {
-    flexDirection: "row",
-    marginTop: 6,
-  },
-
-  stats: {
-    color: "#b0b0b0",
-    fontSize: 12,
-  },
-
-  dot: {
-    color: "#b0b0b0",
-    marginHorizontal: 6,
-  },
-
-  actionBtn: {
-    borderWidth: 1,
-    borderColor: "#3a3a3a",
-    paddingVertical: 6,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-    marginTop: 10,
-  },
-
-  actionText: {
-    color: "#dcdcdc",
-    fontSize: 13,
-  },
-
-  section: {
-    padding: 16,
-    paddingBottom: 4,
-  },
-
-  sectionTitle: {
-    color: "#e8e8e8",
-    fontSize: 18,
-    fontWeight: "600",
-    marginBottom: 8,
-  },
-
-  text: {
-    color: "#c5c5c5",
-    fontSize: 14,
-    lineHeight: 20,
-  },
-
-  card: {
-    backgroundColor: "#141414",
     padding: 14,
-    borderRadius: 12,
-    marginVertical: 8,
-    borderColor: "#1f1f1f",
-    borderWidth: 1,
+    borderRadius: 10,
+    marginRight: 10,
   },
+  quickNum: { color: "#fff", fontSize: 18, fontWeight: "700" },
+  quickLabel: { color: "#9fb2c9", marginTop: 6 },
 
-  cardTitle: {
-    color: "#efefef",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-
-  cardSubtitle: {
-    color: "#9c9c9c",
-    fontSize: 13,
-    marginBottom: 2,
-  },
-
-  cardDuration: {
-    color: "#6f6f6f",
-    fontSize: 12,
-    marginBottom: 8,
-  },
-
-  skillWrap: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-
+  /* Skills */
+  skillWrap: { flexDirection: "row", flexWrap: "wrap" },
   skillTag: {
-    backgroundColor: "#171717",
+    backgroundColor: "#071220",
     borderRadius: 14,
-    paddingVertical: 6,
+    paddingVertical: 8,
     paddingHorizontal: 12,
     margin: 4,
-    borderColor: "#252525",
-    borderWidth: 1,
   },
+  skillText: { color: "#d3eafc", fontSize: 13 },
 
-  skillText: {
-    color: "#d0d0d0",
-    fontSize: 13,
-  },
-
-  rowItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 4,
-  },
-
-  langRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "#141414",
-    padding: 12,
-    borderRadius: 8,
-    marginVertical: 4,
-    borderColor: "#1f1f1f",
-    borderWidth: 1,
-  },
-
-  langText: {
-    color: "#e2e2e2",
-    fontSize: 15,
-  },
-
-  langLevel: {
-    color: "#848484",
-  },
-
-  resumeBtn: {
-    borderWidth: 1,
-    borderColor: "#3a3a3a",
-    paddingVertical: 10,
-    alignItems: "center",
+  /* Cards */
+  card: {
+    backgroundColor: "#080a0f",
+    padding: 14,
     borderRadius: 10,
     marginVertical: 8,
   },
+  cardTitle: { color: "#eaf6ff", fontSize: 15, fontWeight: "700" },
+  cardSub: { color: "#97b0c8", fontSize: 12, marginBottom: 8 },
 
-  resumeText: {
-    color: "#d6d6d6",
-    fontSize: 15,
-    fontWeight: "500",
+  /* Reusable Rows */
+  row: {
+    flexDirection: "row",
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(255,255,255,0.05)",
   },
+  rowLogo: {
+    width: 56,
+    height: 56,
+    borderRadius: 10,
+    backgroundColor: "#071220",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+  },
+  rowLogoText: { color: "#cfe9ff", fontWeight: "700" },
+  rowBody: { flex: 1 },
+  rowTitle: { color: "#eaf6ff", fontWeight: "700" },
+  rowSub: { color: "#9fb2c9", marginTop: 4 },
+  rowMuted: { color: "#7f98ac", marginTop: 4 },
+
+  showMoreRow: { marginTop: 8, alignItems: "center" },
+  showMoreText: { color: "#9fb2c9", fontWeight: "600" },
+
+  /* Resume CTA */
+  resumeCta: {
+    paddingVertical: 12,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#003b66",
+    alignItems: "center",
+  },
+  resumeCtaText: { color: "#d7f0ff", fontWeight: "700" },
 });
