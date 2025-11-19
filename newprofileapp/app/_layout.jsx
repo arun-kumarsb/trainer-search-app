@@ -14,15 +14,15 @@ export default function RootLayout() {
       <Tabs.Screen
         name="project"
         options={{
-          title: 'Project',
-          tabBarIcon: ({ color }) => <FontAwesome name="folder-open" size={28} color={color} />,
+          title: 'My Profile',
+          tabBarIcon: ({ color }) => <FontAwesome name="user" size={28} color={color} />,
         }}
       />
       <Tabs.Screen
         name="contacts"
         options={{
-          title: 'Contacts',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
+          title: 'Contact Me!!',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="phone" color={color} />,
         }}
       />
     </Tabs>
